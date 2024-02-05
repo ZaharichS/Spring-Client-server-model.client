@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" fx:controller="com.example.demodbbootclient.controller.RegisterOverviewController" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutY="41.0" prefHeight="348.0" prefWidth="705.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
+        <columns>
+            <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="id" visible="false" />
+          <TableColumn maxWidth="1.7976931348623157E308" prefWidth="21.0" text="№" />
+            <TableColumn prefWidth="180.0" text="Маршрут" />
+            <TableColumn prefWidth="177.0" text="Пункты посадки" />
+            <TableColumn minWidth="0.0" prefWidth="88.0" text="Время" />
+            <TableColumn prefWidth="120.0" text="Дата" />
+            <TableColumn prefWidth="118.0" text="Свободные места" />
+        </columns>
+      </TableView>
+      <ButtonBar layoutX="152.0" layoutY="396.0" prefHeight="40.0" prefWidth="402.0" AnchorPane.bottomAnchor="0.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#addRegister" text="Добавить" />
+            <Button mnemonicParsing="false" text="Изменить" />
+            <Button mnemonicParsing="false" text="Дублировать" />
+            <Button mnemonicParsing="false" text="Удалить" />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>
