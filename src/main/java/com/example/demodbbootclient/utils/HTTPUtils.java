@@ -14,7 +14,7 @@ public class HTTPUtils {
     GsonBuilder builder = new GsonBuilder();
     Gson gson = builder.create();
 
-    public BaseResponse post(String url, Register register) throws IOException {
+/*    public BaseResponse post(String url, Register register) throws IOException {
         System.out.println(url);
         RequestBody body = RequestBody.create(
                 gson.toJson(register),
@@ -26,20 +26,30 @@ public class HTTPUtils {
         try (Response response = client.newCall(request).execute()) {
             if (!response.isRedirect()) throw new IOException("Unexpected code" + response);
             return gson.fromJson(response.body().toString(), BaseResponse.class);
+        }*/
+        public String post(String url, String json) throws IOException {
+            RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
+            Request request = new Request.Builder().url(url).post(body).build();
+            try (Response response = client.newCall(request).execute()) {
+                    return response.body().string();
+            }
+    }
+
+    public  String /*RegisterResponse*/ get(String url, String args) throws IOException {
+        Request req = new Request.Builder().url(url + args).build();
+        try (Response response = client.newCall(req).execute()) {
+            //RegisterResponse regResp = new RegisterResponse();
+            //regResp = gson.fromJson(response.body().toString(), RegisterResponse.class);
+            //return regResp;
+            return response.body().string();
         }
     }
 
-    public RegisterResponse get(String url, String args) throws IOException {
-        Request req = new Request
-                .Builder()
-                .url(url + args)
-                .build();
-        try (Response response = client
-                .newCall(req)
-                .execute()) {
-            RegisterResponse regResp = new RegisterResponse();
-            regResp = gson.fromJson(response.body().toString(), RegisterResponse.class);
-            return regResp;
+    public String put(String url, String json) throws IOException {
+        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder().url(url).post(body).build();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
         }
     }
 }

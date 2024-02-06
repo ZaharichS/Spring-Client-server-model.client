@@ -1,12 +1,15 @@
 package com.example.demodbbootclient.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Register {
-    private long id;
+    private Integer id;
 
     // Номер рейса
     private String numFlight;
@@ -19,5 +22,5 @@ public class Register {
 
     private String dayFlight;     // Дни отправления
 
-    private String AvailabilitySeatsFlight;     // Количество свободных мест на каждом рейсе
+    private String availabilitySeatsFlight;     // Количество свободных мест на каждом рейсе
 }

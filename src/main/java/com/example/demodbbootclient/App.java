@@ -4,8 +4,8 @@ import com.example.demodbbootclient.controller.ModifyController;
 import com.example.demodbbootclient.controller.RegisterOverviewController;
 import com.example.demodbbootclient.entity.Register;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -31,7 +30,7 @@ public class App extends Application {
         stage.show();
     }
 
-    public static boolean showRegisterEditDialog(Register register, long id){
+    public static boolean showRegisterEditDialog(Register register, Integer id){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(RegisterOverviewController.class.getResource("/view/Modify.fxml"));

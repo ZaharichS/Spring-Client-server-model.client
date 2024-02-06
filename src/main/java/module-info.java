@@ -8,6 +8,8 @@ module com.example.demodbbootclient {
     requires static lombok;
     requires annotations;
 
+    opens com.example.demodbbootclient.utils to javafx.fxml;
+    exports com.example.demodbbootclient.utils;
     opens com.example.demodbbootclient to javafx.fxml;
     exports com.example.demodbbootclient;
     exports com.example.demodbbootclient.entity;
