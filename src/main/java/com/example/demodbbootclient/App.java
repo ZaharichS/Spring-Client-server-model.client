@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+//import javax.swing.*;
 import java.io.IOException;
 
 public class App extends Application {
