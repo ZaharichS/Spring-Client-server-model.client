@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demodbbootclient.controller.ModifyController">
    <children>
       <GridPane layoutX="19.0" layoutY="34.0" prefHeight="253.0" prefWidth="562.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -32,18 +31,18 @@
             <Label text="Время" GridPane.rowIndex="3" />
             <Label text="Дата" GridPane.rowIndex="4" />
             <Label text="Свободные места" GridPane.rowIndex="5" />
-            <TextField prefHeight="25.0" prefWidth="295.0" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="numFlight_field" prefHeight="25.0" prefWidth="295.0" GridPane.columnIndex="1" />
+            <TextField fx:id="trip_field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="stopoverPoints_field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="timeFlight_field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="dayFlight_field" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="availabilitySeatsFlight_field" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <ButtonBar layoutX="210.0" layoutY="303.0" prefHeight="40.0" prefWidth="173.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Сохранить" />
-            <Button mnemonicParsing="false" text="Отмена" />
+          <Button mnemonicParsing="false" onAction="#handleOk" text="Сохранить" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" text="Отмена" />
         </buttons>
       </ButtonBar>
    </children>

@@ -81,9 +81,11 @@ public class RegisterOverviewController {
     }
 
     @FXML
-    private void click_deleteRegister() {
+    private void click_deleteRegister() throws IOException {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
+            System.out.println(selectedRegister.getId());
+            System.out.println(http.delete(api, selectedRegister.getId()));
             registerData.remove(selectedRegister);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
