@@ -102,6 +102,7 @@ public class RegisterOverviewController {
         if (selectedRegister != null) {
             addRegister(selectedRegister);
             registerData.add(registerData.indexOf(selectedRegister) + 1, selectedRegister);
+            System.out.println(http.delete(api, selectedRegister.getId()));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -115,6 +116,7 @@ public class RegisterOverviewController {
     private void click_editRegister() throws IOException {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
+            System.out.println(http.put(api, "", selectedRegister.getId()));
             App.showRegisterEditDialog(selectedRegister,registerData.indexOf(selectedRegister));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -125,17 +127,13 @@ public class RegisterOverviewController {
         }
     }
 
-    /*    @FXML
-    void addRegister(ActionEvent event) throws IOException {
-        App.showRegisterEditDialog(new Register(),123);
-    }*/
-
     public static void addRegister(Register register) throws IOException {
         System.out.println(register.toString());
         register.setId(null);
         http.post(api + "add", gson.toJson(register).toString());
     }
-    public static void updateRegister(Register register) throws IOException {
-        http.put(api + "update", gson.toJson(register).toString());
+    public static void updateRegister(Register register, Integer id) throws IOException {
+        System.out.println(register.toString());
+        http.put(api + "update" + id , gson.toJson(register).toString(), id);
     }
 }

@@ -1,8 +1,6 @@
 package com.example.demodbbootclient.utils;
 
-import com.example.demodbbootclient.entity.Register;
-import com.example.demodbbootclient.response.BaseResponse;
-import com.example.demodbbootclient.response.RegisterResponse;
+import com.example.demodbbootclient.controller.RegisterOverviewController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.*;
@@ -46,16 +44,16 @@ public class HTTPUtils {
         }
     }
 
-    public String put(String url, String json) throws IOException {
+    public String put(String url, String json, Integer id) throws IOException {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder().url(url).post(body).build();
+        Request request = new Request.Builder().url(url + "update?id=" + id).post(body).build();
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }
     }
 
     public String delete(String url, Integer id) throws IOException  {
-        Request request = new Request.Builder().url(url + "?id=" + id).delete().build();
+        Request request = new Request.Builder().url(url + "delete?id=" + id).delete().build();
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }
