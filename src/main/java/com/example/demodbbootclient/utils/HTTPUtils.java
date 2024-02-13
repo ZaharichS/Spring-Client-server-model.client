@@ -44,7 +44,14 @@ public class HTTPUtils {
         }
     }
 
-    public String put(String url, String json, Integer id) throws IOException {
+ /*   public String put(String url, String json) throws IOException {
+        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder().url(url + "update?id=").post(body).build();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
+    }*/
+    public String put(String url, Integer id, String json) throws IOException {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
         Request request = new Request.Builder().url(url + "update?id=" + id).post(body).build();
         try (Response response = client.newCall(request).execute()) {

@@ -17,9 +17,6 @@ import lombok.Data;
 
 import java.io.IOException;
 
-import static com.example.demodbbootclient.controller.RegisterOverviewController.registerData;
-import static com.example.demodbbootclient.controller.RegisterOverviewController.updateRegister;
-
 @Data
 public class RegisterOverviewController {
     public static String api = "http://localhost:2825/api/v1/register/";
@@ -27,8 +24,11 @@ public class RegisterOverviewController {
     static HTTPUtils http = new HTTPUtils();
     static Gson gson = new Gson();
 
+
     @FXML
     public TableView<Register> tableRegister;
+    @FXML
+    public TableColumn<Register, String> flightId;
     @FXML
     private TableColumn<Register, String> numFlight;
     @FXML
@@ -50,6 +50,7 @@ public class RegisterOverviewController {
     }
 
     private void updateData() throws Exception {
+        flightId.setCellValueFactory(new PropertyValueFactory<Register, String>("flightId"));
         numFlight.setCellValueFactory(new PropertyValueFactory<Register,String>("numFlight"));
         trip.setCellValueFactory(new PropertyValueFactory<Register,String>("trip"));
         stopoverPoints.setCellValueFactory(new PropertyValueFactory<Register,String>("stopoverPoints"));
@@ -84,8 +85,8 @@ public class RegisterOverviewController {
     private void click_deleteRegister() throws IOException {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
-            System.out.println(selectedRegister.getId());
-            System.out.println(http.delete(api, selectedRegister.getId()));
+            System.out.println(selectedRegister.getFlightId());
+            System.out.println(http.delete(api, selectedRegister.getFlightId()));
             registerData.remove(selectedRegister);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -102,7 +103,7 @@ public class RegisterOverviewController {
         if (selectedRegister != null) {
             addRegister(selectedRegister);
             registerData.add(registerData.indexOf(selectedRegister) + 1, selectedRegister);
-            System.out.println(http.delete(api, selectedRegister.getId()));
+            System.out.println(http.delete(api, selectedRegister.getFlightId()));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -116,7 +117,7 @@ public class RegisterOverviewController {
     private void click_editRegister() throws IOException {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
-            System.out.println(http.put(api, "", selectedRegister.getId()));
+            System.out.println(http.put(api, selectedRegister.getFlightId(), ""));
             App.showRegisterEditDialog(selectedRegister,registerData.indexOf(selectedRegister));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -129,11 +130,17 @@ public class RegisterOverviewController {
 
     public static void addRegister(Register register) throws IOException {
         System.out.println(register.toString());
-        register.setId(null);
+        //register.setId(null);
         http.post(api + "add", gson.toJson(register).toString());
     }
-    public static void updateRegister(Register register, Integer id) throws IOException {
+/*    public static void updateRegister(Register register) throws IOException {
         System.out.println(register.toString());
-        http.put(api + "update" + id , gson.toJson(register).toString(), id);
-    }
+        register.setId(null);
+        http.put(api + "update", gson.toJson(register).toString());
+    }*/
+public static void updateRegister(Register register, Integer id) throws IOException {
+    System.out.println(register.toString());
+    register.setFlightId(null);
+    http.put(api + "update" + id, id,gson.toJson(register).toString() );
+}
 }

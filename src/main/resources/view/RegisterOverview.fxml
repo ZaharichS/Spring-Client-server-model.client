@@ -10,7 +10,7 @@
    <children>
       <TableView fx:id="tableRegister" layoutY="41.0" prefHeight="348.0" prefWidth="705.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
         <columns>
-            <TableColumn maxWidth="37.0" minWidth="-1.0" prefWidth="32.0" text="id" />
+            <TableColumn fx:id="flightId" maxWidth="37.0" minWidth="-1.0" prefWidth="32.0" text="id" />
           <TableColumn fx:id="numFlight" maxWidth="1.7976931348623157E308" prefWidth="36.0" text="№" />
             <TableColumn fx:id="trip" prefWidth="133.0" text="Маршрут" />
             <TableColumn fx:id="stopoverPoints" prefWidth="177.0" text="Пункты посадки" />
