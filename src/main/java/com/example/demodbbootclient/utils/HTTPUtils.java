@@ -34,26 +34,16 @@ public class HTTPUtils {
             }
     }
 
-    public  String /*RegisterResponse*/ get(String url, String args) throws IOException {
+    public  String get(String url, String args) throws IOException {
         Request request = new Request.Builder().url(url + args).build();
         try (Response response = client.newCall(request).execute()) {
-            //RegisterResponse regResp = new RegisterResponse();
-            //regResp = gson.fromJson(response.body().toString(), RegisterResponse.class);
-            //return regResp;
             return response.body().string();
         }
     }
 
- /*   public String put(String url, String json) throws IOException {
+    public String put(Integer register_id, String json) throws IOException {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder().url(url + "update?id=").post(body).build();
-        try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
-        }
-    }*/
-    public String put(String url, Integer id, String json) throws IOException {
-        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder().url(url + "update?id=" + id).post(body).build();
+        Request request = new Request.Builder().url("http://localhost:2825/api/v1/register/update?id=" + register_id).put(body).build();
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }

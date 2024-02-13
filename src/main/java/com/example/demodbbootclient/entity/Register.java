@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Register {
-    private Integer flightId;
+    private Integer id;
 
     // Номер рейса
     private String numFlight;

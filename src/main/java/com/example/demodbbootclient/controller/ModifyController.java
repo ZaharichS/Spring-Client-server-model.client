@@ -62,7 +62,7 @@ public class ModifyController {
 
             okClicked = true;
             modifyStage.close();
-            registerData.set(register_id,register);
+            registerData.set(register_id, register);
             updateRegister(register,register_id);
         }
     }

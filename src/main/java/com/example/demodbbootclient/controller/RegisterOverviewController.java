@@ -27,30 +27,36 @@ public class RegisterOverviewController {
 
     @FXML
     public TableView<Register> tableRegister;
+
     @FXML
-    public TableColumn<Register, String> flightId;
+    public TableColumn<Register, String> id;
+
     @FXML
     private TableColumn<Register, String> numFlight;
+
     @FXML
     private TableColumn<Register, String> trip;
+
     @FXML
     private TableColumn<Register, String> stopoverPoints;
+
     @FXML
     private TableColumn<Register, String> timeFlight;
+
     @FXML
     private TableColumn<Register, String> dayFlight;
+
     @FXML
     private TableColumn<Register, String> availabilitySeatsFlight;
 
     @FXML
     private void initialize() throws Exception {
-        //System.out.println(http.get("http://localhost:2825","/api/v1/register/all"));
         getData();
         updateData();
     }
 
     private void updateData() throws Exception {
-        flightId.setCellValueFactory(new PropertyValueFactory<Register, String>("flightId"));
+        id.setCellValueFactory(new PropertyValueFactory<Register, String>("id"));
         numFlight.setCellValueFactory(new PropertyValueFactory<Register,String>("numFlight"));
         trip.setCellValueFactory(new PropertyValueFactory<Register,String>("trip"));
         stopoverPoints.setCellValueFactory(new PropertyValueFactory<Register,String>("stopoverPoints"));
@@ -60,34 +66,20 @@ public class RegisterOverviewController {
         tableRegister.setItems(registerData);
     }
 
-    public static void getData() throws Exception {
-        String res = http.get(api,"all");
-        System.out.println(res);
-
-        JsonObject base = gson.fromJson(res, JsonObject.class);
-        JsonArray data = base.getAsJsonArray("data");
-
-        for (int i = 0; i < data.size(); i++) {
-            Register newRegister = gson.fromJson(data.get(i).toString(), Register.class);
-            registerData.add(newRegister);
-        }
-    }
-
     @FXML
     private void click_newRegister() throws Exception {
-        Register reg = new Register();
-        registerData.add(reg);
-        App.showRegisterEditDialog(reg,registerData.size()-1);
-        addRegister(reg);
+        Register tempReg = new Register();
+        registerData.add(tempReg);
+        App.showRegisterEditDialog(tempReg, registerData.size()-1);
+        addRegister(tempReg);
     }
 
     @FXML
     private void click_deleteRegister() throws IOException {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
-            System.out.println(selectedRegister.getFlightId());
-            System.out.println(http.delete(api, selectedRegister.getFlightId()));
             registerData.remove(selectedRegister);
+            System.out.println(http.delete(api, selectedRegister.getId()));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -103,7 +95,7 @@ public class RegisterOverviewController {
         if (selectedRegister != null) {
             addRegister(selectedRegister);
             registerData.add(registerData.indexOf(selectedRegister) + 1, selectedRegister);
-            System.out.println(http.delete(api, selectedRegister.getFlightId()));
+            //System.out.println(http.post(api + "add", gson.toJson(selectedRegister).toString()));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -117,8 +109,8 @@ public class RegisterOverviewController {
     private void click_editRegister() throws IOException {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
-            System.out.println(http.put(api, selectedRegister.getFlightId(), ""));
-            App.showRegisterEditDialog(selectedRegister,registerData.indexOf(selectedRegister));
+            App.showRegisterEditDialog(selectedRegister, registerData.indexOf(selectedRegister));
+            //System.out.println(http.put(api+ "update?id=", selectedRegister.getId(), gson.toJson(selectedRegister).toString()));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -128,19 +120,29 @@ public class RegisterOverviewController {
         }
     }
 
+    public static void getData() throws Exception {
+        String res = http.get(api,"all");
+        System.out.println(res);
+
+        JsonObject base = gson.fromJson(res, JsonObject.class);
+        JsonArray data = base.getAsJsonArray("data");
+
+        for (int i = 0; i < data.size(); i++) {
+            Register newRegister = gson.fromJson(data.get(i).toString(), Register.class);
+            registerData.add(newRegister);
+        }
+    }
+
     public static void addRegister(Register register) throws IOException {
         System.out.println(register.toString());
-        //register.setId(null);
-        http.post(api + "add", gson.toJson(register).toString());
-    }
-/*    public static void updateRegister(Register register) throws IOException {
-        System.out.println(register.toString());
         register.setId(null);
-        http.put(api + "update", gson.toJson(register).toString());
-    }*/
-public static void updateRegister(Register register, Integer id) throws IOException {
-    System.out.println(register.toString());
-    register.setFlightId(null);
-    http.put(api + "update" + id, id,gson.toJson(register).toString() );
-}
+        http.post(api + "add", gson.toJson(register).toString());
+        System.out.println(http.post(api + "add", gson.toJson(register).toString()));
+    }
+
+    public static void updateRegister(Register register, Integer register_id) throws IOException {
+        System.out.println(register.toString());
+        http.put(register_id, gson.toJson(register).toString() );
+        System.out.println(http.put(register_id, gson.toJson(register).toString() ));
+    }
 }
