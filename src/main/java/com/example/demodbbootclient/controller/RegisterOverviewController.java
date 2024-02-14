@@ -113,7 +113,7 @@ public class RegisterOverviewController {
         if (selectedRegister != null) {
             App.showRegisterEditDialog(selectedRegister, registerData.indexOf(selectedRegister));
 //            System.out.println(http.put(api+ "update?id=", selectedRegister.getId(), gson.toJson(selectedRegister).toString()));
-            System.out.println(http.put(api + "update?id=", selectedRegister.getId(), gson.toJson(selectedRegister).toString() ));
+            System.out.println(http.put(api, selectedRegister.getId(), gson.toJson(selectedRegister).toString() ));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -147,6 +147,6 @@ public class RegisterOverviewController {
         System.out.println(register.toString());
 //        http.put(api, register.getId(), gson.toJson(register).toString() );
         System.out.println(register.getId());
-        http.put(api + "update?id=", register.getId(), gson.toJson(register).toString() );
+        http.put(api, register.getId(), gson.toJson(register).toString() );
     }
 }

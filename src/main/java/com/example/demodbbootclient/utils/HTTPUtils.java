@@ -44,7 +44,7 @@ public class HTTPUtils {
 
     public String put(String url, Integer id, String json) throws IOException {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder().url(url + "" + id).put(body).build();
+        Request request = new Request.Builder().url(url + "update?id=" + id).put(body).build();
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }

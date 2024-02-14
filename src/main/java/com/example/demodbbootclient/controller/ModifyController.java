@@ -38,7 +38,7 @@ public class ModifyController {
 
     public boolean isOkClicked() { return okClicked; }
 
-    public void setLabels(Register regIn, Integer reg_id) {
+    public void setLabels(Register regIn, int reg_id) {
         this.register = regIn;
         this.register_id = reg_id;
 
