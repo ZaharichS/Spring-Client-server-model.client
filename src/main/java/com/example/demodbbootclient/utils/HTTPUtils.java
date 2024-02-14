@@ -1,6 +1,7 @@
 package com.example.demodbbootclient.utils;
 
 import com.example.demodbbootclient.controller.RegisterOverviewController;
+import com.example.demodbbootclient.entity.Register;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.*;
@@ -41,9 +42,9 @@ public class HTTPUtils {
         }
     }
 
-    public String put(Integer register_id, String json) throws IOException {
+    public String put(String url, Integer id, String json) throws IOException {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder().url("http://localhost:2825/api/v1/register/update?id=" + register_id).put(body).build();
+        Request request = new Request.Builder().url(url + "" + id).put(body).build();
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
         }

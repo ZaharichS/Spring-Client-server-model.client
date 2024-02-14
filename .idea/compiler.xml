@@ -14,6 +14,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Spring-Client-server-model.client" options="-parameters" />
       <module name="demoDBBootClient" options="-parameters" />
     </option>
   </component>
