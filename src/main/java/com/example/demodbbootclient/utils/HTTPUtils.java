@@ -14,7 +14,7 @@ public class HTTPUtils {
     GsonBuilder builder = new GsonBuilder();
     Gson gson = builder.create();
 
-        public String post(String url, String json) throws IOException {
+    public String post(String url, String json) throws IOException {
             RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
             Request request = new Request.Builder().url(url).post(body).build();
             try (Response response = client.newCall(request).execute()) {
@@ -29,11 +29,11 @@ public class HTTPUtils {
         }
     }
 
-    public String put(String url, String id, String json) throws IOException {
+    public String post(String url, String json, String id) throws IOException {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder().url(url + "update/" + id).put(body).build();
-        //System.out.println(url + "/" + id);
+        Request request = new Request.Builder().url(url + "update").post(body).build();
         try (Response response = client.newCall(request).execute()) {
+            //System.out.println(request.url() + "" + id);
             return response.body().string();
         }
     }
