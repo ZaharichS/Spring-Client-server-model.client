@@ -33,7 +33,6 @@ public class HTTPUtils {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
         Request request = new Request.Builder().url(url + "update").post(body).build();
         try (Response response = client.newCall(request).execute()) {
-            //System.out.println(request.url() + "" + id);
             return response.body().string();
         }
     }

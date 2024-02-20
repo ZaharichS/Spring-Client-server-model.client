@@ -22,9 +22,11 @@ public class App extends Application {
         fxmlLoader.setLocation(RegisterOverviewController.class.getResource("/view/RegisterOverview.fxml"));
         AnchorPane app = fxmlLoader.load();
 
-        Scene scene = new Scene(app, 800,600);
+        Scene scene = new Scene(app, 705,430);
         stage.setTitle("CashRegister");
         stage.setScene(scene);
+
+        stage.setResizable(false);
 
         RegisterOverviewController controller = fxmlLoader.getController();
         stage.show();

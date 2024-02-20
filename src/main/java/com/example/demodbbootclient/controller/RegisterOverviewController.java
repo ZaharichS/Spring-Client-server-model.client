@@ -93,7 +93,7 @@ public class RegisterOverviewController {
     }
 
     @FXML
-    private void click_dublicatedRegister() throws IOException {
+    private void click_dublicatedRegister() throws Exception, IOException {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
             addRegister(selectedRegister);
@@ -112,7 +112,7 @@ public class RegisterOverviewController {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
             App.showRegisterEditDialog(selectedRegister, registerData.indexOf(selectedRegister));
-            System.out.println(http.post(api + "", gson.toJson(selectedRegister).toString(), "2"));
+            System.out.println(http.post(api + "", gson.toJson(selectedRegister).toString(), ""));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -145,6 +145,6 @@ public class RegisterOverviewController {
     public static void updateRegister(Register register) throws IOException {
         System.out.println(register.toString());
         System.out.println(register.getId());
-        http.post(api + "", gson.toJson(register).toString(), "2" );
+        http.post(api + "", gson.toJson(register).toString(), "" );
     }
 }
