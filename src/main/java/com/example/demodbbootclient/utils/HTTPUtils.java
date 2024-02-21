@@ -1,7 +1,5 @@
 package com.example.demodbbootclient.utils;
 
-import com.example.demodbbootclient.controller.RegisterOverviewController;
-import com.example.demodbbootclient.entity.Register;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.*;
@@ -15,11 +13,11 @@ public class HTTPUtils {
     Gson gson = builder.create();
 
     public String post(String url, String json) throws IOException {
-            RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
-            Request request = new Request.Builder().url(url).post(body).build();
-            try (Response response = client.newCall(request).execute()) {
-                    return response.body().string();
-            }
+        RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder().url(url + "add").post(body).build();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
     }
 
     public  String get(String url, String args) throws IOException {
@@ -29,7 +27,7 @@ public class HTTPUtils {
         }
     }
 
-    public String post(String url, String json, String id) throws IOException {
+    public String update(String url, String json) throws IOException {
         RequestBody body = RequestBody.create(json, MediaType.get("application/json; charset=utf-8"));
         Request request = new Request.Builder().url(url + "update").post(body).build();
         try (Response response = client.newCall(request).execute()) {

@@ -14,8 +14,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Data;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
 
 import java.io.IOException;
 
@@ -73,7 +71,7 @@ public class RegisterOverviewController {
     private void click_newRegister() throws Exception {
         Register tempReg = new Register();
         registerData.add(tempReg);
-        App.showRegisterEditDialog(tempReg, registerData.size()-1);
+        App.showRegisterAddDialog(tempReg, registerData.size()-1);
         addRegister(tempReg);
     }
 
@@ -98,6 +96,8 @@ public class RegisterOverviewController {
         if (selectedRegister != null) {
             addRegister(selectedRegister);
             registerData.add(registerData.indexOf(selectedRegister) + 1, selectedRegister);
+            System.out.println("Рейс был дублирован");
+            tableRegister.refresh();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -112,7 +112,7 @@ public class RegisterOverviewController {
         Register selectedRegister = tableRegister.getSelectionModel().getSelectedItem();
         if (selectedRegister != null) {
             App.showRegisterEditDialog(selectedRegister, registerData.indexOf(selectedRegister));
-            System.out.println(http.post(api + "", gson.toJson(selectedRegister).toString(), ""));
+            System.out.println(http.update(api, gson.toJson(selectedRegister).toString()));
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -138,13 +138,12 @@ public class RegisterOverviewController {
     public static void addRegister(Register register) throws IOException {
         System.out.println(register.toString());
         register.setId(null);
-        http.post(api + "add", gson.toJson(register).toString());
-        System.out.println("Рейс добавлен");
+        http.post(api, gson.toJson(register).toString());
     }
 
     public static void updateRegister(Register register) throws IOException {
         System.out.println(register.toString());
         System.out.println(register.getId());
-        http.post(api + "", gson.toJson(register).toString(), "" );
+        http.update(api, gson.toJson(register).toString());
     }
 }
