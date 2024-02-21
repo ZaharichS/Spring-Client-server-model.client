@@ -5,6 +5,8 @@ import com.example.demodbbootclient.controller.NewRegisterController;
 import com.example.demodbbootclient.controller.RegisterOverviewController;
 import com.example.demodbbootclient.entity.Register;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

@@ -8,9 +8,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class RegisterResponse extends BaseResponse {
-    public RegisterResponse(Iterable<Register> data) {
-        super(true, "Полёты");
+    public  RegisterResponse(Boolean success,String message, Iterable<Register> data) {
+        super(success,message);
         this.data = data;
     }
+
     private Iterable<Register> data;
 }

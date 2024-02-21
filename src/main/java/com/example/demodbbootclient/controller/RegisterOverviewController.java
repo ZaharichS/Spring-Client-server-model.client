@@ -72,7 +72,6 @@ public class RegisterOverviewController {
         Register tempReg = new Register();
         registerData.add(tempReg);
         App.showRegisterAddDialog(tempReg, registerData.size()-1);
-        addRegister(tempReg);
     }
 
     @FXML
@@ -97,7 +96,6 @@ public class RegisterOverviewController {
             addRegister(selectedRegister);
             registerData.add(registerData.indexOf(selectedRegister) + 1, selectedRegister);
             System.out.println("Рейс был дублирован");
-            tableRegister.refresh();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Ничего не выбрано");
@@ -143,7 +141,6 @@ public class RegisterOverviewController {
 
     public static void updateRegister(Register register) throws IOException {
         System.out.println(register.toString());
-        System.out.println(register.getId());
         http.update(api, gson.toJson(register).toString());
     }
 }
